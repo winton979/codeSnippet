@@ -60,7 +60,7 @@ public class AdminUserThirdLoginService {
 			try {
 				String resultJson = iService.get("https://graph.qq.com/user/get_user_info", param);
 				Map<String,String> resultObject = (Map<String, String>) JSON.parse(resultJson);
-				if (resultObject.containsKey("ret")) {
+				if (!"0".equals(String.valueOf(resultObject.get("ret")))) {
 					return R.ok(400,"","QQ授权验证不通过");
 				} else {
 					return R.ok(200,"","QQ登录成功");
